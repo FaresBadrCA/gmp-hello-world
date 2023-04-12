@@ -1,6 +1,4 @@
-=======================================================
-CYGWIN INSTALLATION
-=======================================================
+# CYGWIN INSTALLATION
 
 Installation steps:
 
@@ -22,30 +20,27 @@ Installation steps:
 - Execute: make install
 - Execute: make check
 
-Now C:\gmp\.libs should have some .a and .la files, which we link to by calling:
+Now C:\gmp\.libs should have some .a and .la files. We link and compile by running:
 
-g++ hello.cpp -I "C:\gmp" -L"C:\gmp\.libs" -lgmp -lgmpxx -o hello 
+<code> g++ hello.cpp -I "C:\gmp" -L"C:\gmp\.libs" -lgmp -lgmpxx -o hello </code>
 
 This worked but I had a problem getting it to work with gdbgui (a GUI for the gdb debugger). 
 It was failing to locate files using cygwin's UNIX-style file system
 
-=========================================================
-MSYS2 INSTALLATION
-=========================================================
+--------------------
+
+# MSYS2 INSTALLATION
+
 
 I found MSYS2 to work much more easily than Cygwin. Install MSYS2 from https://www.msys2.org/
+I run msys2.exe, which opens a terminal. Install packages by running:
 
-I run msys2.exe, which opens a terminal. In there, I run: pacman -Ss <PACKAGE NAME>
-to search for packages, and then pacman -S <PACKAGE NAME> to install it
+<code> pacman -S [PACKAGE NAME] </code>
 
-I installed these packages: (names here are not exact, use the search function to get the
-	- mingw-w64-x86_64-gcc  (gcc/g++ compilers)
-	- mingw-w64-x86_64-gdb  (debugger)
-	- mingw-w64-x86_64-gmp  (multiprecision library)
-	- mingw-w64-x86_64-make (build utility)
+I installed these packages:
+ - mingw-w64-x86_64-gcc  (gcc/g++ compilers)
+ - mingw-w64-x86_64-gdb  (debugger)
+ - mingw-w64-x86_64-gmp  (multiprecision library)
+ - mingw-w64-x86_64-make (build utility)
 
-Then the gcc/g++ compilers are in mingw64\bin
-The gmp statically-linked libraries are in mingw64\lib
-Lastly, the gmp.h/gmpxx.h header files are in mingw64\include
-
-g++ hello.cpp -I "C:\msys64\mingw64\include" -L "C:\msys64\mingw64\lib" -lgmp -lgmpxx -o hello
+Add an environment variable, <code>MINGW64_HOME</code>, whose value is the path to the mingw64 folder. (C:\msys64\mingw64). Also add the mingw64/bin folder to PATH. Finally, compile by running <code>make</code>
